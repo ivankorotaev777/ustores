@@ -91,7 +91,7 @@ export const translations = {
         {
           quote: 'Мы упёрлись в last-mile как в бутылочное горлышко. С Ustores стало проще: понятные стандарты и управляемая сеть. Мы сфокусировались на ассортименте и маркетинге, а выдача не тормозила рост.',
           author: 'Илья Суслов',
-          company: 'D2C бренд',
+          company: 'Директор по логистике, Маркетплейс',
           tag: 'Масштабирование',
         },
         {
@@ -288,7 +288,7 @@ export const translations = {
         {
           quote: 'We hit last-mile as a bottleneck. With Ustores, it became easier: clear standards and manageable network. We focused on assortment and marketing while delivery didn\'t slow growth.',
           author: 'Ilya Suslov',
-          company: 'D2C Brand',
+          company: 'Logistics Director, Marketplace',
           tag: 'Scaling',
         },
         {
@@ -485,7 +485,7 @@ export const translations = {
         {
           quote: '我们在最后一公里遇到了瓶颈。有了Ustores，一切变得更简单：清晰的标准和可管理的网络。我们专注于品类和营销，配送不再拖慢增长。',
           author: '伊利亚·苏斯洛夫',
-          company: 'D2C品牌',
+          company: '物流总监，电商平台',
           tag: '规模化',
         },
         {
