@@ -1,0 +1,9 @@
+export { Header } from './Header';
+export { Hero } from './Hero';
+export { Problem } from './Problem';
+export { Benefits } from './Benefits';
+export { Testimonials } from './Testimonials';
+export { WhatIsIt } from './WhatIsIt';
+export { Pricing } from './Pricing';
+export { CTA } from './CTA';
+export { Footer } from './Footer';
