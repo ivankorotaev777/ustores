@@ -139,7 +139,7 @@ export const translations = {
           description: 'Абонплата $1000/мес + оплата за выдачу',
           features: [
             '5 локаций по городу',
-            '$0.005 за кг/единицу',
+            '$0.5 за кг/единицу',
             'Базовая отчётность',
             'Стандартные SLA',
           ],
@@ -336,7 +336,7 @@ export const translations = {
           description: '$1000/month subscription + delivery fee',
           features: [
             '5 locations in the city',
-            '$0.005 per kg/unit',
+            '$0.5 per kg/unit',
             'Basic reporting',
             'Standard SLAs',
           ],
@@ -533,7 +533,7 @@ export const translations = {
           description: '月费$1000 + 配送费',
           features: [
             '城市5个网点',
-            '$0.005/公斤/件',
+            '$0.5/公斤/件',
             '基础报告',
             '标准SLA',
           ],
