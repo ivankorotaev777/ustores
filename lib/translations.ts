@@ -1,4 +1,4 @@
-export type Language = 'ru' | 'en' | 'zh';
+export type Language = 'ru' | 'en' | 'zh' | 'uz';
 
 export const translations = {
   ru: {
@@ -11,6 +11,7 @@ export const translations = {
       howItWorks: 'Как это работает',
       pricing: 'Цены',
       contact: 'Связаться',
+      forLandlords: 'Для арендодателей',
     },
     hero: {
       badge: 'Сеть ПВЗ в Узбекистане',
@@ -208,6 +209,7 @@ export const translations = {
       howItWorks: 'How it works',
       pricing: 'Pricing',
       contact: 'Contact',
+      forLandlords: 'For Landlords',
     },
     hero: {
       badge: 'Pickup Point Network in Uzbekistan',
@@ -405,6 +407,7 @@ export const translations = {
       howItWorks: '运作方式',
       pricing: '价格',
       contact: '联系我们',
+      forLandlords: '房东专区',
     },
     hero: {
       badge: '乌兹别克斯坦自提点网络',
@@ -592,6 +595,196 @@ export const translations = {
       copyright: '© 2026 Ustores. 版权所有。',
     },
   },
+  uz: {
+    meta: {
+      title: "Ustores — O'zbekistondagi buyurtma olish punktlari tarmog'i | Oxirgi mil",
+      description: "Toshkentdagi mavjud buyurtma olish punktlari tarmog'i. Tayyor infratuzilmaga ulaning va faqat haqiqiy topshirishlar uchun to'lang.",
+    },
+    nav: {
+      benefits: 'Afzalliklar',
+      howItWorks: 'Qanday ishlaydi',
+      pricing: 'Narxlar',
+      contact: "Bog'lanish",
+      forLandlords: 'Ijaraga beruvchilar uchun',
+    },
+    hero: {
+      badge: "O'zbekistondagi buyurtma olish punktlari",
+      title: "Oxirgi mil bo'yicha ishonchli hamkoringiz",
+      subtitle: "O'zbekiston bozoriga chiqmoqchimisiz va o'z infratuzilmangizni qurmay buyurtmalarni tez yetkazib berishni xohlaysizmi?",
+      description: "Ustores — bu buyurtma olish punktlari tarmog'i va operatsion jamoa bo'lib, bizning tarmog'imiz orqali topshirish va qaytarishlarni qabul qiladi.",
+      highlight: "Bashorat qilinadigan xarajatlar: obuna to'lovi + haqiqiy topshirishlar uchun to'lov",
+      cta1: "Tarmoqqa ulaning",
+      cta2: "Shartlarni so'rang",
+      cta3: "Qo'ng'iroqni belgilang",
+      stats: {
+        points: 'Toshkentdagi punktlar',
+        orders: 'Oylik buyurtmalar',
+        sla: 'Topshirish SLA',
+      },
+    },
+    problem: {
+      badge: 'Muammo',
+      title: "Nima uchun oxirgi mil O'zbekistonda ishga tushirishni qiyinlashtiradi",
+      subtitle: "Brend yoki marketplace uchun yangi mamlakatda oxirgi mil deyarli doimo eng qimmat va xavfli qism bo'ladi",
+      problems: [
+        {
+          title: 'Noldan boshlash uzoq davom etadi',
+          description: "Joylashuvlar, ta'mirlar, belgilar, kelishuvlar, yollash va o'qitish — bu oylar, bozor esa kutmaydi.",
+          icon: 'clock',
+        },
+        {
+          title: "Xizmat obro'ga ta'sir qiladi",
+          description: "Navbatlar, topshirish/qabul qilishdagi xatolar, 'inson omili', shikoyatlar — bularning barchasi takroriy xaridlarga ta'sir qiladi.",
+          icon: 'warning',
+        },
+        {
+          title: "Operatsion ishlar jamoani yeydi",
+          description: "Jadvallar, intizom nazorati, standartlar, hodisalar, hisobotlar — tajribali operatorsiz bu doimiy 'yong'in'.",
+          icon: 'fire',
+        },
+        {
+          title: "O'sish bilan sifatni saqlash qiyin",
+          description: "Bitta punkt yaxshi ishlashi mumkin, lekin 10-30-50 joylashuvli tarmoq tizimli boshqaruvni talab qiladi.",
+          icon: 'chart',
+        },
+      ],
+      conclusion: "Agar vazifangiz bozorga tez chiqish va kengayish bo'lsa, kompaniya ichida oxirgi milni qurish — bu chalg'itish, xavf va qo'shimcha xarajatlar.",
+    },
+    benefits: {
+      badge: 'Afzalliklar',
+      title: "Siz oladigan 3 ta natija",
+      subtitle: "Ustores tarmog'iga ulanib, siz tayyor infratuzilma va tajribaga ega bo'lasiz",
+      items: [
+        {
+          title: 'Toshkentda tez ishga tushirish',
+          description: "O'z buyurtma olish punktlaringizni ochishingiz shart emas — allaqachon ishlayotgan infratuzilmaga ulanasiz va tezroq topshirishni boshlaysiz.",
+          highlight: "Mavjud tarmoq orqali",
+        },
+        {
+          title: "Bashorat qilinadigan iqtisodiyot",
+          description: "Foizli model kirish to'sig'ini kamaytiradi: kamroq doimiy xarajatlar, unit-iqtisodiyot ustidan ko'proq nazorat.",
+          highlight: "Moslashuvchan to'lov modeli",
+        },
+        {
+          title: 'Barqaror sifat',
+          description: "Punktlarda yagona ish qoidalari, o'qitilgan xodimlar va muntazam hisobotlar xizmatni darajada ushlab turishga yordam beradi.",
+          highlight: "Standartlar va KPI",
+        },
+      ],
+    },
+    testimonials: {
+      badge: 'Sharhlar',
+      title: 'Hamkorlarimiz nima deydi',
+      subtitle: "O'zbekiston bozoriga muvaffaqiyatli chiqish haqida haqiqiy hikoyalar",
+      items: [
+        {
+          quote: "Bizga O'zbekistonni tez va punktlarga investitsiyasiz sinab ko'rish kerak edi. Ustoresga ulandik — kechikmasdan ishga tushdik, hajmdan to'lov esa ehtiyotkor tezlashish uchun ideal mos keldi.",
+          author: 'Minjun Kim',
+          company: "Rivojlanish rahbari, D2C brend",
+          tag: "Pilot → o'sish",
+        },
+        {
+          quote: "Oxirgi mil to'siq bo'lib qoldi. Ustores bilan osonlashdi: aniq standartlar va boshqariladigan tarmoq. Biz assortiment va marketingga e'tibor qaratdik, topshirish esa o'sishni sekinlashtirmadi.",
+          author: 'Ilya Suslov',
+          company: 'Logistika direktori, Marketplace',
+          tag: 'Masshtablash',
+        },
+        {
+          quote: "Eng muhimi — barqarorlik: turli joylashurlarda bir xil xizmat. Ustoresda tizimli yondashuv: jarayonlar, intizom, hisobotlar. Bu hodisalar sonini sezilarli kamaytirdi.",
+          author: 'Lisa Reynolds',
+          company: "Operatsiyalar menejeri, Xalqaro brend",
+          tag: 'Sifat nazorati',
+        },
+      ],
+    },
+    whatIsIt: {
+      badge: "Bu nima",
+      title: 'Ustores nima qiladi',
+      subtitle: "Biz tayyor infratuzilma va operatsion jamoani taqdim etamiz, siz esa o'z biznesingizga e'tibor qaratasiz",
+      whatWeDo: {
+        title: 'Biz nima qilamiz',
+        items: [
+          "Tayyor buyurtma olish punktlarida topshirish va qaytarishlarni qabul qilish",
+          "Xodimlarni yollash, o'qitish va boshqarish",
+          "Kunlik hisobotlar: topshirishlar, qaytarishlar, SLA",
+          "Inventarizatsiya, qabul qilish va saqlash",
+          "Xizmat sifatini nazorat qilish",
+        ],
+      },
+      howToConnect: {
+        title: "Qanday ulash mumkin",
+        items: [
+          "Shartlarni muhokama qilish uchun so'rov qoldiring",
+          "Qamrov va boshlash sanasini kelishib olamiz",
+          "Shartnoma imzolaymiz va integratsiyani boshlaymiz",
+          "Siz buyurtmalarni yo'naltirasiz, biz topshirishlarni ta'minlaymiz",
+        ],
+      },
+    },
+    pricing: {
+      badge: 'Narxlar',
+      title: "O'zingizga mos tarifni tanlang",
+      subtitle: "Moslashuvchan modellar: hajmdan to'lovdan to to'liq SLA bilan abonent to'lovigacha",
+      paymentNote: "Abonent to'lovi + topshirish uchun to'lov — o'z tarmog'ingizga investitsiyasiz",
+      plans: [
+        {
+          name: 'Asosiy',
+          description: "Hajmdan foiz — kichik hajmlar uchun ideal",
+          features: [
+            "Topshirishlar sonidan to'lov",
+            'Kg/birlik uchun $0.5',
+            "Minimal oylik to'lovsiz",
+            "Standart hisobotlar",
+          ],
+          cta: "Batafsil ma'lumot",
+          popular: false,
+        },
+        {
+          name: 'Foiz + SLA',
+          description: "Abonent to'lovi $3000/oy + foiz — 20 joylashuv",
+          features: [
+            "Kafolatlangan SLA 99%",
+            "Ustuvor qo'llab-quvvatlash",
+            "Kengaytirilgan hisobotlar",
+            "Integratsiya uchun API",
+          ],
+          cta: "Ulaning",
+          popular: true,
+        },
+        {
+          name: "Yechim",
+          description: "Yirik hamkorlar uchun individual shartlar",
+          features: [
+            "Maxsus tarif modeli",
+            "Brendlangan xizmat",
+            "Tizimlaringiz bilan integratsiya",
+            "Shaxsiy menejer",
+          ],
+          cta: "Shartlarni muhokama qilish",
+          popular: false,
+        },
+      ],
+      minOrder: "Minimal xizmat buyurtmasi — 3 oy",
+    },
+    cta: {
+      title: "Bozorga o'z tarmog'ingizsiz chiqing",
+      subtitle: "Birinchi oydan bashorat qilinadigan xarajatlar — bugun ishlashni boshlang",
+      buttons: {
+        connect: "Tarmoqqa ulaning",
+        conditions: "Shartlarni so'rang",
+        presentation: "Taqdimotni oling",
+      },
+    },
+    footer: {
+      description: "Ustores — O'zbekistondagi buyurtma olish punktlari tarmog'i. Biz brendlar va marketplacelar uchun oxirgi mil masalasini hal qilamiz.",
+      links: {
+        company: 'Kompaniya',
+        privacy: 'Maxfiylik siyosati',
+        terms: "Foydalanish shartlari",
+      },
+      copyright: "© 2026 Ustores. Barcha huquqlar himoyalangan.",
+    },
+  },
 };
 
 export function getTranslation(lang: Language) {
@@ -602,4 +795,5 @@ export const languages: { code: Language; name: string; flag: string }[] = [
   { code: 'ru', name: 'Русский', flag: '🇷🇺' },
   { code: 'en', name: 'English', flag: '🇺🇸' },
   { code: 'zh', name: '中文', flag: '🇨🇳' },
+  { code: 'uz', name: "O'zbek", flag: '🇺🇿' },
 ];

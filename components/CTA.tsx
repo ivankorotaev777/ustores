@@ -73,19 +73,19 @@ export function CTA({ lang }: CTAProps) {
             <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            <span className="text-xs sm:text-sm">{lang === 'ru' ? 'Быстрый запуск' : lang === 'en' ? 'Fast launch' : '快速启动'}</span>
+            <span className="text-xs sm:text-sm">{lang === 'ru' ? 'Быстрый запуск' : lang === 'en' ? 'Fast launch' : lang === 'uz' ? 'Tez ishga tushirish' : '快速启动'}</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            <span className="text-xs sm:text-sm">{lang === 'ru' ? 'Оплата от объёма' : lang === 'en' ? 'Volume-based pricing' : '按量付费'}</span>
+            <span className="text-xs sm:text-sm">{lang === 'ru' ? 'Оплата от объёма' : lang === 'en' ? 'Volume-based pricing' : lang === 'uz' ? "Hajmdan to'lov" : '按量付费'}</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            <span className="text-xs sm:text-sm">{lang === 'ru' ? '25+ точек в Ташкенте' : lang === 'en' ? '25+ points in Tashkent' : '塔什干25+网点'}</span>
+            <span className="text-xs sm:text-sm">{lang === 'ru' ? '25+ точек в Ташкенте' : lang === 'en' ? '25+ points in Tashkent' : lang === 'uz' ? 'Toshkentda 25+ punkt' : '塔什干25+网点'}</span>
           </div>
         </div>
       </div>

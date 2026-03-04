@@ -38,6 +38,9 @@ export function Header({ lang }: HeaderProps) {
             <Link href={`/${lang}/contacts`} className="text-slate-300 hover:text-white transition-colors text-sm">
               {t.nav.contact}
             </Link>
+            <Link href={`/${lang}/rent`} className="text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium">
+              {t.nav.forLandlords}
+            </Link>
           </nav>
 
           {/* Right Side */}
@@ -137,6 +140,13 @@ export function Header({ lang }: HeaderProps) {
               >
                 {t.nav.contact}
               </Link>
+              <Link
+                href={`/${lang}/rent`}
+                className="px-4 py-3 text-amber-400 hover:text-amber-300 hover:bg-white/5 rounded-lg transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t.nav.forLandlords}
+              </Link>
               <a
                 href="https://t.me/Ivan_Korotaev"
                 target="_blank"
@@ -144,7 +154,7 @@ export function Header({ lang }: HeaderProps) {
                 className="mx-4 mt-2 px-4 py-3 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-semibold text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {lang === 'ru' ? 'Написать' : lang === 'en' ? 'Message' : '发消息'}
+                {lang === 'ru' ? 'Написать' : lang === 'en' ? 'Message' : lang === 'uz' ? 'Yozish' : '发消息'}
               </a>
             </div>
           </nav>

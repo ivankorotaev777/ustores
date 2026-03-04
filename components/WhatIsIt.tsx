@@ -108,8 +108,8 @@ export function WhatIsIt({ lang }: WhatIsItProps) {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1 sm:mb-2">{lang === 'ru' ? 'Готовы начать?' : lang === 'en' ? 'Ready to start?' : '准备开始？'}</h4>
-                  <p className="text-sm text-slate-400">{lang === 'ru' ? 'Свяжитесь с нами для обсуждения условий' : lang === 'en' ? 'Contact us to discuss terms' : '联系我们讨论条款'}</p>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1 sm:mb-2">{lang === 'ru' ? 'Готовы начать?' : lang === 'en' ? 'Ready to start?' : lang === 'uz' ? 'Boshlashga tayyormisiz?' : '准备开始？'}</h4>
+                  <p className="text-sm text-slate-400">{lang === 'ru' ? 'Свяжитесь с нами для обсуждения условий' : lang === 'en' ? 'Contact us to discuss terms' : lang === 'uz' ? "Shartlarni muhokama qilish uchun biz bilan bog'laning" : '联系我们讨论条款'}</p>
                 </div>
               </div>
             </div>

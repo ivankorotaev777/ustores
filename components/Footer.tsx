@@ -46,12 +46,17 @@ export function Footer({ lang }: FooterProps) {
                   {t.nav.pricing}
                 </a>
               </li>
+              <li>
+                <Link href={`/${lang}/rent`} className="text-sm sm:text-base text-amber-400 hover:text-amber-300 transition-colors font-medium">
+                  {t.nav.forLandlords}
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Language & Social */}
           <div>
-            <h4 className="text-white font-semibold mb-4">{lang === 'ru' ? 'Язык' : lang === 'en' ? 'Language' : '语言'}</h4>
+            <h4 className="text-white font-semibold mb-4">{lang === 'ru' ? 'Язык' : lang === 'en' ? 'Language' : lang === 'uz' ? 'Til' : '语言'}</h4>
             <div className="flex flex-wrap gap-2 mb-6">
               {languages.map((language) => (
                 <Link

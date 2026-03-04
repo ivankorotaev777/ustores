@@ -75,6 +75,20 @@ html {
   animation: float 3s ease-in-out infinite;
 }
 
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
 /* Gradient text utility */
 .text-gradient {
   background: linear-gradient(135deg, #fbbf24, #f97316);

@@ -17,16 +17,18 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: PageProps): Metadata {
   const validLang = languages.some((l) => l.code === params.lang) ? (params.lang as Language) : 'ru';
   
-  const titles = {
+  const titles: Record<Language, string> = {
     ru: 'Контакты — Ustores',
     en: 'Contacts — Ustores',
     zh: '联系我们 — Ustores',
+    uz: "Kontaktlar — Ustores",
   };
 
-  const descriptions = {
+  const descriptions: Record<Language, string> = {
     ru: 'Свяжитесь с нами. Ответим на все вопросы и поможем подобрать подходящие условия.',
     en: 'Contact us. We will answer all your questions and help you find the right terms.',
     zh: '联系我们。我们将回答您的所有问题并帮助您找到合适的条款。',
+    uz: "Biz bilan bog'laning. Barcha savollarga javob beramiz va mos shartlarni topishga yordam beramiz.",
   };
 
   return {
@@ -110,6 +112,30 @@ export default function ContactsPage({ params }: PageProps) {
       telegramBtn: '发送Telegram消息',
       mapTitle: '地图位置',
       mapAddress: '塔什干，沙伊汉塔胡尔区，Djangokh区，37号',
+    },
+    uz: {
+      title: "Biz bilan bog'laning",
+      subtitle: "Barcha savollarga javob beramiz va mos shartlarni topishga yordam beramiz. Odatda 15 daqiqada javob beramiz.",
+      contactInfo: "Aloqa ma'lumotlari",
+      phone: 'Telefon',
+      phoneNumber: '+998 90 347 86 92',
+      phoneHint: "Qo'ng'iroq qilish uchun bosing",
+      telegram: 'Telegram',
+      telegramHandle: '@Ivan_Korotaev',
+      telegramHint: 'Messenjerda tez javoblar',
+      address: 'Ofis manzili',
+      addressLine1: 'Toshkent shahri, Shayxontohur tumani',
+      addressLine2: 'Jangoh dahasi, 37',
+      workingHours: 'Ish vaqti',
+      workingHoursLine1: 'Du–Ju: 9:00 – 18:00',
+      workingHoursLine2: 'Sha–Ya: kelishuvga binoan',
+      company: 'Kompaniya',
+      companyName: '"Ustores" MCHJ',
+      companyCountry: "O'zbekiston Respublikasi",
+      callBtn: "Qo'ng'iroq qilish",
+      telegramBtn: 'Telegramda yozish',
+      mapTitle: 'Xaritada joylashuv',
+      mapAddress: 'Toshkent, Shayxontohur tumani, Jangoh dahasi, 37',
     },
   };
 
