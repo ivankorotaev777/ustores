@@ -729,6 +729,7 @@ export const translations = {
       plans: [
         {
           name: 'Asosiy',
+          tag: 'Boshlash uchun',
           description: "Hajmdan foiz — kichik hajmlar uchun ideal",
           features: [
             "Topshirishlar sonidan to'lov",
@@ -737,10 +738,11 @@ export const translations = {
             "Standart hisobotlar",
           ],
           cta: "Batafsil ma'lumot",
-          popular: false,
+          highlighted: false,
         },
         {
           name: 'Foiz + SLA',
+          tag: "Kengaytirilgan xizmat",
           description: "Abonent to'lovi $3000/oy + foiz — 20 joylashuv",
           features: [
             "Kafolatlangan SLA 99%",
@@ -749,10 +751,11 @@ export const translations = {
             "Integratsiya uchun API",
           ],
           cta: "Ulaning",
-          popular: true,
+          highlighted: true,
         },
         {
           name: "Yechim",
+          tag: 'Katta hajmlar uchun',
           description: "Yirik hamkorlar uchun individual shartlar",
           features: [
             "Maxsus tarif modeli",
@@ -761,7 +764,7 @@ export const translations = {
             "Shaxsiy menejer",
           ],
           cta: "Shartlarni muhokama qilish",
-          popular: false,
+          highlighted: false,
         },
       ],
       minOrder: "Minimal xizmat buyurtmasi — 3 oy",
