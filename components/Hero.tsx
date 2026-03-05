@@ -99,7 +99,7 @@ export function Hero({ lang }: HeroProps) {
               <div className="grid grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div className="text-center p-3 sm:p-4 rounded-2xl bg-white/5">
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">
-                    30+
+                    40+
                   </div>
                   <div className="text-xs sm:text-sm text-slate-400 mt-1">{t.hero.stats.points}</div>
                 </div>
