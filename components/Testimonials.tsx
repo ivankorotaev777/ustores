@@ -1,4 +1,5 @@
 import { Language, getTranslation } from '@/lib/translations';
+import { AnimateOnView } from './AnimateOnView';
 
 interface TestimonialsProps {
   lang: Language;
@@ -25,6 +26,7 @@ export function Testimonials({ lang }: TestimonialsProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
+        <AnimateOnView>
         <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4 sm:mb-6">
             <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
@@ -39,13 +41,14 @@ export function Testimonials({ lang }: TestimonialsProps) {
             {t.testimonials.subtitle}
           </p>
         </div>
+        </AnimateOnView>
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {t.testimonials.items.map((testimonial, index) => (
+            <AnimateOnView key={index} delay={index * 100}>
             <div
-              key={index}
-              className="group relative p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-white/5 hover:border-amber-500/20 transition-all duration-300"
+              className="group relative p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-white/5 hover:border-amber-500/20 transition-all duration-300 hover:-translate-y-1"
             >
               {/* Quote icon */}
               <svg className="w-8 h-8 sm:w-10 sm:h-10 text-amber-500/20 mb-4 sm:mb-6" fill="currentColor" viewBox="0 0 24 24">
@@ -92,6 +95,7 @@ export function Testimonials({ lang }: TestimonialsProps) {
                 ))}
               </div>
             </div>
+            </AnimateOnView>
           ))}
         </div>
       </div>

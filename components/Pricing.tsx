@@ -1,4 +1,5 @@
 import { Language, getTranslation } from '@/lib/translations';
+import { AnimateOnView } from './AnimateOnView';
 
 interface PricingProps {
   lang: Language;
@@ -16,6 +17,7 @@ export function Pricing({ lang }: PricingProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
+        <AnimateOnView>
         <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4 sm:mb-6">
             <svg className="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,12 +32,13 @@ export function Pricing({ lang }: PricingProps) {
             {t.pricing.subtitle}
           </p>
         </div>
+        </AnimateOnView>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {t.pricing.plans.map((plan, index) => (
+            <AnimateOnView key={index} delay={index * 100}>
             <div
-              key={index}
               className={`relative p-6 sm:p-8 rounded-3xl transition-all duration-300 ${
                 plan.highlighted
                   ? 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-2 border-amber-500/50 hover:border-amber-400'
@@ -95,10 +98,12 @@ export function Pricing({ lang }: PricingProps) {
                 </svg>
               </a>
             </div>
+            </AnimateOnView>
           ))}
         </div>
 
         {/* Bottom notes */}
+        <AnimateOnView delay={80}>
         <div className="text-center mt-8 sm:mt-12 max-w-2xl mx-auto space-y-2">
           <p className="text-sm sm:text-base text-slate-500">
             {t.pricing.paymentNote}
@@ -107,6 +112,7 @@ export function Pricing({ lang }: PricingProps) {
             {t.pricing.minOrder}
           </p>
         </div>
+        </AnimateOnView>
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+export { AnimateOnView } from './AnimateOnView';
 export { Header } from './Header';
 export { Hero } from './Hero';
 export { Problem } from './Problem';

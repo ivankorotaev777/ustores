@@ -16,7 +16,7 @@ export function Header({ lang }: HeaderProps) {
   const currentLang = languages.find((l) => l.code === lang) || languages[0];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5 motion-safe:animate-fade-in motion-safe:[animation-fill-mode:both] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
@@ -40,6 +40,9 @@ export function Header({ lang }: HeaderProps) {
             </Link>
             <Link href={`/${lang}/rent`} className="text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium">
               {t.nav.forLandlords}
+            </Link>
+            <Link href={`/${lang}/poisk-personala`} className="text-slate-300 hover:text-white transition-colors text-sm">
+              {t.nav.personnelSearch}
             </Link>
           </nav>
 
@@ -146,6 +149,13 @@ export function Header({ lang }: HeaderProps) {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t.nav.forLandlords}
+              </Link>
+              <Link
+                href={`/${lang}/poisk-personala`}
+                className="px-4 py-3 text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t.nav.personnelSearch}
               </Link>
               <a
                 href="https://t.me/Ivan_Korotaev"

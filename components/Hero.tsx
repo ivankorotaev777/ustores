@@ -11,10 +11,10 @@ export function Hero({ lang }: HeroProps) {
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-slate-950">
-        {/* Gradient orbs */}
-        <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-amber-500/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-orange-500/15 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-600/10 rounded-full blur-[150px]" />
+        {/* Gradient orbs — медленный «живой» фон */}
+        <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-amber-500/20 rounded-full blur-[120px] motion-safe:animate-blob motion-safe:[animation-delay:0s] will-change-transform" />
+        <div className="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-orange-500/15 rounded-full blur-[120px] motion-safe:animate-blob motion-safe:[animation-delay:-7s] will-change-transform" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-600/10 rounded-full blur-[150px] motion-safe:animate-blob motion-safe:[animation-delay:-14s] will-change-transform" />
         
         {/* Grid pattern */}
         <div 
@@ -31,13 +31,13 @@ export function Hero({ lang }: HeroProps) {
           {/* Left Content */}
           <div className="space-y-6 sm:space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-500/10 border border-amber-500/20">
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-500/10 border border-amber-500/20 motion-safe:animate-fade-in-up motion-safe:[animation-fill-mode:both] motion-safe:[animation-delay:0ms]">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-400 animate-pulse motion-reduce:animate-none" />
               <span className="text-amber-400 text-xs sm:text-sm font-medium">{t.hero.badge}</span>
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight motion-safe:animate-fade-in-up motion-safe:[animation-fill-mode:both] motion-safe:[animation-delay:90ms]">
               <span className="bg-gradient-to-r from-white via-white to-slate-400 bg-clip-text text-transparent">
                 Ustores —{' '}
               </span>
@@ -47,17 +47,17 @@ export function Hero({ lang }: HeroProps) {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg lg:text-xl text-slate-400 leading-relaxed max-w-xl">
+            <p className="text-base sm:text-lg lg:text-xl text-slate-400 leading-relaxed max-w-xl motion-safe:animate-fade-in-up motion-safe:[animation-fill-mode:both] motion-safe:[animation-delay:180ms]">
               {t.hero.subtitle}
             </p>
 
             {/* Description */}
-            <p className="text-sm sm:text-base text-slate-500 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base text-slate-500 leading-relaxed max-w-xl motion-safe:animate-fade-in-up motion-safe:[animation-fill-mode:both] motion-safe:[animation-delay:260ms]">
               {t.hero.description}
             </p>
 
             {/* Highlight */}
-            <div className="flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-4 rounded-2xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20">
+            <div className="flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-4 rounded-2xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 motion-safe:animate-fade-in-up motion-safe:[animation-fill-mode:both] motion-safe:[animation-delay:340ms]">
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
@@ -65,7 +65,7 @@ export function Hero({ lang }: HeroProps) {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 motion-safe:animate-fade-in-up motion-safe:[animation-fill-mode:both] motion-safe:[animation-delay:420ms]">
               <a
                 href="https://t.me/Ivan_Korotaev"
                 target="_blank"
@@ -91,7 +91,7 @@ export function Hero({ lang }: HeroProps) {
           {/* Right Content - Stats */}
           <div className="relative lg:pl-8">
             {/* Main Card */}
-            <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-3xl border border-white/10 p-6 sm:p-8 backdrop-blur-xl">
+            <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-3xl border border-white/10 p-6 sm:p-8 backdrop-blur-xl motion-safe:animate-scale-in motion-safe:[animation-fill-mode:both] motion-safe:[animation-delay:200ms]">
               {/* Decorative corner */}
               <div className="absolute -top-px -right-px w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-tr-3xl rounded-bl-3xl opacity-20" />
               

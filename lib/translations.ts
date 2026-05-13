@@ -12,6 +12,7 @@ export const translations = {
       pricing: 'Цены',
       contact: 'Связаться',
       forLandlords: 'Для арендодателей',
+      personnelSearch: 'Поиск персонала',
     },
     hero: {
       badge: 'Сеть ПВЗ в Узбекистане',
@@ -210,6 +211,7 @@ export const translations = {
       pricing: 'Pricing',
       contact: 'Contact',
       forLandlords: 'For Landlords',
+      personnelSearch: 'Staff hiring',
     },
     hero: {
       badge: 'Pickup Point Network in Uzbekistan',
@@ -408,6 +410,7 @@ export const translations = {
       pricing: '价格',
       contact: '联系我们',
       forLandlords: '房东专区',
+      personnelSearch: '人员招聘',
     },
     hero: {
       badge: '乌兹别克斯坦自提点网络',
@@ -606,6 +609,7 @@ export const translations = {
       pricing: 'Narxlar',
       contact: "Bog'lanish",
       forLandlords: 'Ijaraga beruvchilar uchun',
+      personnelSearch: 'Kadrlar tanlovi',
     },
     hero: {
       badge: "O'zbekistondagi buyurtma olish punktlari",

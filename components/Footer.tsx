@@ -2,6 +2,7 @@
 
 import { Language, languages, getTranslation } from '@/lib/translations';
 import Link from 'next/link';
+import { AnimateOnView } from './AnimateOnView';
 
 interface FooterProps {
   lang: Language;
@@ -16,6 +17,7 @@ export function Footer({ lang }: FooterProps) {
       <div className="absolute inset-0 bg-slate-950" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AnimateOnView>
         <div className="grid md:grid-cols-4 gap-8 sm:gap-12">
           {/* Logo & Description */}
           <div className="md:col-span-2">
@@ -51,6 +53,11 @@ export function Footer({ lang }: FooterProps) {
                   {t.nav.forLandlords}
                 </Link>
               </li>
+              <li>
+                <Link href={`/${lang}/poisk-personala`} className="text-sm sm:text-base text-slate-400 hover:text-amber-400 transition-colors">
+                  {t.nav.personnelSearch}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -75,6 +82,7 @@ export function Footer({ lang }: FooterProps) {
 
           </div>
         </div>
+        </AnimateOnView>
 
         {/* Bottom */}
         <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">

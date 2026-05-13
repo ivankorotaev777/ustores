@@ -1,4 +1,5 @@
 import { Language, getTranslation } from '@/lib/translations';
+import { AnimateOnView } from './AnimateOnView';
 
 interface WhatIsItProps {
   lang: Language;
@@ -35,6 +36,7 @@ export function WhatIsIt({ lang }: WhatIsItProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
+        <AnimateOnView>
         <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4 sm:mb-6">
             <svg className="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,9 +51,11 @@ export function WhatIsIt({ lang }: WhatIsItProps) {
             {t.whatIsIt.subtitle}
           </p>
         </div>
+        </AnimateOnView>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Features */}
+          <AnimateOnView>
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6">{t.whatIsIt.whatWeDo.title}</h3>
             {t.whatIsIt.whatWeDo.items.map((feature, index) => (
@@ -73,8 +77,10 @@ export function WhatIsIt({ lang }: WhatIsItProps) {
               </div>
             ))}
           </div>
+          </AnimateOnView>
 
           {/* Steps */}
+          <AnimateOnView delay={100}>
           <div className="relative">
             <h3 className="text-lg sm:text-xl font-semibold text-white mb-6 sm:mb-8">{t.whatIsIt.howToConnect.title}</h3>
             
@@ -114,6 +120,7 @@ export function WhatIsIt({ lang }: WhatIsItProps) {
               </div>
             </div>
           </div>
+          </AnimateOnView>
         </div>
       </div>
     </section>

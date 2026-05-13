@@ -1,4 +1,5 @@
 import { Language, getTranslation } from '@/lib/translations';
+import { AnimateOnView } from './AnimateOnView';
 
 interface ProblemProps {
   lang: Language;
@@ -31,6 +32,7 @@ export function Problem({ lang }: ProblemProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
+        <AnimateOnView>
         <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-orange-500/10 border border-orange-500/20 mb-4 sm:mb-6">
             <svg className="w-4 h-4 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,13 +47,14 @@ export function Problem({ lang }: ProblemProps) {
             {t.problem.subtitle}
           </p>
         </div>
+        </AnimateOnView>
 
         {/* Problem Cards */}
         <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
           {t.problem.problems.map((problem, index) => (
+            <AnimateOnView key={index} delay={index * 75}>
             <div
-              key={index}
-              className="group relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-white/5 hover:border-orange-500/20 transition-all duration-300"
+              className="group relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-white/5 hover:border-orange-500/20 transition-all duration-300 hover:-translate-y-1"
             >
               {/* Icon */}
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -71,15 +74,18 @@ export function Problem({ lang }: ProblemProps) {
                 {String(index + 1).padStart(2, '0')}
               </div>
             </div>
+            </AnimateOnView>
           ))}
         </div>
 
         {/* Bottom Message */}
+        <AnimateOnView delay={120}>
         <div className="mt-6 sm:mt-8 text-center">
           <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto">
             {t.problem.conclusion}
           </p>
         </div>
+        </AnimateOnView>
       </div>
     </section>
   );

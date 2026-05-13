@@ -1,4 +1,5 @@
 import { Language, getTranslation } from '@/lib/translations';
+import { AnimateOnView } from './AnimateOnView';
 
 interface CTAProps {
   lang: Language;
@@ -12,12 +13,13 @@ export function CTA({ lang }: CTAProps) {
       {/* Background */}
       <div className="absolute inset-0 bg-slate-950">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-amber-950/20 to-slate-950" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-amber-500/20 rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-amber-500/20 rounded-full blur-[150px] motion-safe:animate-blob motion-safe:[animation-delay:-5s] will-change-transform" />
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <AnimateOnView>
         {/* Icon */}
-        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 mb-6 sm:mb-8 shadow-2xl shadow-amber-500/25">
+        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 mb-6 sm:mb-8 shadow-2xl shadow-amber-500/25 motion-safe:animate-float">
           <svg className="w-8 h-8 sm:w-10 sm:h-10 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
@@ -88,6 +90,7 @@ export function CTA({ lang }: CTAProps) {
             <span className="text-xs sm:text-sm">{lang === 'ru' ? '25+ точек в Ташкенте' : lang === 'en' ? '25+ points in Tashkent' : lang === 'uz' ? 'Toshkentda 25+ punkt' : '塔什干25+网点'}</span>
           </div>
         </div>
+        </AnimateOnView>
       </div>
     </section>
   );

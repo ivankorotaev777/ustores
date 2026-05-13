@@ -1,4 +1,5 @@
 import { Language, getTranslation } from '@/lib/translations';
+import { AnimateOnView } from './AnimateOnView';
 
 interface BenefitsProps {
   lang: Language;
@@ -35,6 +36,7 @@ export function Benefits({ lang }: BenefitsProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
+        <AnimateOnView>
         <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4 sm:mb-6">
             <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-400" />
@@ -47,12 +49,13 @@ export function Benefits({ lang }: BenefitsProps) {
             {t.benefits.subtitle}
           </p>
         </div>
+        </AnimateOnView>
 
         {/* Benefits Cards */}
         <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {t.benefits.items.map((benefit, index) => (
+            <AnimateOnView key={index} delay={index * 90}>
             <div
-              key={index}
               className="group relative p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-white/5 hover:border-amber-500/20 transition-all duration-500 hover:-translate-y-2"
             >
               {/* Glow effect on hover */}
@@ -89,6 +92,7 @@ export function Benefits({ lang }: BenefitsProps) {
                 </svg>
               </div>
             </div>
+            </AnimateOnView>
           ))}
         </div>
       </div>
