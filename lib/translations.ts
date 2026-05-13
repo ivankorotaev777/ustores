@@ -12,7 +12,7 @@ export const translations = {
       pricing: 'Цены',
       contact: 'Связаться',
       forLandlords: 'Для арендодателей',
-      personnelSearch: 'Поиск персонала',
+      personnelSearch: 'Поиск оператора',
     },
     hero: {
       badge: 'Сеть ПВЗ в Узбекистане',
