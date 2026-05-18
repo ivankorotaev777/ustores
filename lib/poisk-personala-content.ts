@@ -85,8 +85,7 @@ const ru: PoiskPersonalaContent = {
     h1: 'Найдём оператора для вашего ПВЗ за 14 дней под ключ',
     subtitle: 'Ustores помогает владельцам ПВЗ быстро закрывать вакансии операторов.',
     lead: [
-      'Мы размещаем вакансию, запускаем локальный поиск вокруг вашей точки, проводим первичный отбор, направляем кандидата на обучение и сопровождаем его на этапе стажировки.',
-      'Через 14 дней вы получаете кандидата, который прошёл обучение, стажировку и согласован Uzum для начала работы на вашем ПВЗ.',
+      'Мы размещаем вакансию в HH.uz, telegram группах, запускаем локальный поиск вокруг вашей точки, проводим первичный отбор, направляем кандидата на обучение, сопровождаем его на этапе стажировки и оформляем в UZUM.',
     ],
     ctaHint:
       'Напишите нам в Telegram — уточним адрес вашего ПВЗ, условия вакансии и запустим подбор оператора.',
@@ -341,8 +340,7 @@ const en: PoiskPersonalaContent = {
     h1: 'We will find an operator for your pickup point in 14 days, turnkey',
     subtitle: 'Ustores helps pickup point owners fill operator vacancies quickly.',
     lead: [
-      'We publish the vacancy, run local sourcing around your location, screen candidates, send the chosen person to training, and support them during internship.',
-      'In 14 days you receive a candidate who has completed training and internship and is cleared by Uzum to start at your pickup point.',
+      'We post the vacancy on HH.uz and in Telegram groups, run local sourcing around your location, screen candidates, send them to training, support them during internship, and complete onboarding with Uzum.',
     ],
     ctaHint:
       'Message us on Telegram — we will confirm your pickup address, vacancy terms, and start the search.',
