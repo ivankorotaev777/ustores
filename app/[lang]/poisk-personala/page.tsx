@@ -104,12 +104,12 @@ export default function PoiskPersonalaPage({ params }: PageProps) {
           <p className="text-slate-400 text-center mb-10 text-lg leading-relaxed">{t.risk.intro}</p>
 
           <div className="rounded-2xl border-2 border-red-500/40 bg-red-950/20 p-6 sm:p-8 mb-8">
-            <h3 className="text-lg font-semibold text-red-200 mb-4">{t.risk.penaltiesTitle}</h3>
-            <ul className="space-y-3">
+            <h3 className="text-xl sm:text-2xl font-semibold text-red-200 mb-5">{t.risk.penaltiesTitle}</h3>
+            <ul className="space-y-4">
               {t.risk.penalties.map((row, i) => (
-                <li key={i} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-b border-white/10 pb-3 last:border-0 last:pb-0">
-                  <span className="text-slate-300">{row.label}</span>
-                  <span className="text-white font-semibold text-lg tabular-nums">{row.amount}</span>
+                <li key={i} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                  <span className="text-slate-300 text-base sm:text-lg">{row.label}</span>
+                  <span className="text-white font-semibold text-xl sm:text-2xl tabular-nums">{row.amount}</span>
                 </li>
               ))}
             </ul>
