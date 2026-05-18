@@ -78,13 +78,6 @@ export default function PoiskPersonalaPage({ params }: PageProps) {
                   <p key={i}>{p}</p>
                 ))}
               </div>
-              <SectionCard className="text-left mb-8 border-amber-500/20 bg-amber-500/5">
-                {t.hero.pricing.map((line, i) => (
-                  <p key={i} className="text-white font-medium">
-                    {line}
-                  </p>
-                ))}
-              </SectionCard>
               <TelegramCta>{t.cta}</TelegramCta>
               <p className="mt-4 text-sm sm:text-base text-slate-400">{t.hero.ctaHint}</p>
             </div>

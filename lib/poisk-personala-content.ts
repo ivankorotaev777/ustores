@@ -11,7 +11,6 @@ export type PoiskPersonalaContent = {
     h1: string;
     subtitle: string;
     lead: string[];
-    pricing: string[];
     ctaHint: string;
   };
   risk: {
@@ -88,11 +87,6 @@ const ru: PoiskPersonalaContent = {
     lead: [
       'Мы размещаем вакансию, запускаем локальный поиск вокруг вашей точки, проводим первичный отбор, направляем кандидата на обучение и сопровождаем его на этапе стажировки.',
       'Через 14 дней вы получаете кандидата, который прошёл обучение, стажировку и согласован Uzum для начала работы на вашем ПВЗ.',
-    ],
-    pricing: [
-      'Стоимость — 3 000 000 сум + НДС.',
-      'Предоплата — 500 000 сум.',
-      'Остаток — после первого месяца работы кандидата.',
     ],
     ctaHint:
       'Напишите нам в Telegram — уточним адрес вашего ПВЗ, условия вакансии и запустим подбор оператора.',
@@ -349,11 +343,6 @@ const en: PoiskPersonalaContent = {
     lead: [
       'We publish the vacancy, run local sourcing around your location, screen candidates, send the chosen person to training, and support them during internship.',
       'In 14 days you receive a candidate who has completed training and internship and is cleared by Uzum to start at your pickup point.',
-    ],
-    pricing: [
-      'Service fee — 3,000,000 UZS + VAT.',
-      'Advance payment — 500,000 UZS.',
-      'Balance — after the candidate’s first month on the job.',
     ],
     ctaHint:
       'Message us on Telegram — we will confirm your pickup address, vacancy terms, and start the search.',
