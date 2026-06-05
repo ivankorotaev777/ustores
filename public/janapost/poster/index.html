@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jańa Post — постер с QR (для печати)</title>
+  <!-- генератор QR на клиенте -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --brand: #10b981;
+      --ink: #12151a;
+      --paper: #f7f6f3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #e9e6e0;
+      color: var(--ink);
+      display: flex; flex-direction: column; align-items: center; padding: 24px;
+    }
+    .toolbar { width: 210mm; max-width: 100%; display: flex; gap: 10px; align-items: center; margin-bottom: 16px; }
+    .toolbar input { flex: 1; padding: 10px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
+    .toolbar button { padding: 10px 16px; border: 0; border-radius: 8px; background: var(--brand); color: #fff; font-weight: 700; cursor: pointer; }
+    .toolbar .note { font-size: 12px; color: #777; }
+
+    /* A4-постер */
+    .poster {
+      width: 210mm; height: 297mm; background: var(--paper);
+      box-shadow: 0 10px 40px rgba(0,0,0,.18);
+      padding: 28mm 22mm; display: flex; flex-direction: column;
+    }
+    .brandbar { display: flex; align-items: center; justify-content: space-between; }
+    .wordmark { font-weight: 800; font-size: 34px; letter-spacing: -0.02em; }
+    .wordmark b { color: var(--brand); }
+    .brandbar .city { font-size: 16px; color: #777; }
+
+    .headline { margin-top: 40px; }
+    .kicker {
+      display: inline-block; background: var(--brand); color: #fff; font-weight: 800;
+      padding: 8px 18px; border-radius: 999px; font-size: 20px;
+    }
+    .headline h1 { font-size: 64px; line-height: 1.04; letter-spacing: -0.03em; margin: 22px 0 0; }
+    .headline h1 .accent { color: var(--brand); }
+    .headline p { font-size: 24px; color: #4a4f57; margin: 20px 0 0; max-width: 150mm; }
+
+    .qrblock { margin-top: auto; display: flex; align-items: center; gap: 30px; }
+    .qrbox { background: #fff; padding: 16px; border-radius: 18px; box-shadow: 0 6px 24px rgba(0,0,0,.1); }
+    #qr { width: 240px; height: 240px; }
+    #qr img, #qr canvas { width: 240px !important; height: 240px !important; }
+    .qrtext h2 { font-size: 30px; margin: 0 0 8px; }
+    .qrtext p { font-size: 20px; color: #4a4f57; margin: 0; }
+    .qrtext .url { margin-top: 14px; font-size: 15px; color: var(--brand); font-weight: 700; word-break: break-all; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .toolbar { display: none; }
+      .poster { box-shadow: none; }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- панель настройки (не печатается) -->
+  <div class="toolbar">
+    <input id="urlInput" type="text" placeholder="URL посадочной страницы для QR" />
+    <button id="applyBtn" type="button">Обновить QR</button>
+    <button id="printBtn" type="button">🖨 Печать</button>
+  </div>
+  <span class="toolbar note">Укажите финальный URL лендинга → «Обновить QR» → «Печать» (A4). QR ведёт туда, куда укажете.</span>
+
+  <!-- сам постер -->
+  <div class="poster">
+    <div class="brandbar">
+      <div class="wordmark">Jańa <b>Post</b></div>
+      <div class="city">Ташкент</div>
+    </div>
+
+    <div class="headline">
+      <span class="kicker">А вы знали?</span>
+      <h1>У нас <span class="accent">27 пунктов</span> выдачи в Ташкенте</h1>
+      <p>Какой-то из них наверняка ближе к вам, чем этот. Наведите камеру телефона на QR-код и найдите ближайший пункт.</p>
+    </div>
+
+    <div class="qrblock">
+      <div class="qrbox"><div id="qr"></div></div>
+      <div class="qrtext">
+        <h2>Сканируйте камерой →</h2>
+        <p>Введите свой адрес — покажем ближайшие пункты на карте.</p>
+        <div class="url" id="urlEcho"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // URL по умолчанию — замените на адрес, где будет размещён лендинг.
+    const DEFAULT_URL = "https://example.com/janapost-locator";
+    const qrEl = document.getElementById("qr");
+    const urlInput = document.getElementById("urlInput");
+    const urlEcho = document.getElementById("urlEcho");
+    let qr;
+
+    function render(url) {
+      qrEl.innerHTML = "";
+      qr = new QRCode(qrEl, { text: url, width: 240, height: 240, correctLevel: QRCode.CorrectLevel.H });
+      urlEcho.textContent = url;
+    }
+
+    urlInput.value = DEFAULT_URL;
+    render(DEFAULT_URL);
+
+    document.getElementById("applyBtn").addEventListener("click", () => {
+      const u = urlInput.value.trim();
+      if (u) render(u);
+    });
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>

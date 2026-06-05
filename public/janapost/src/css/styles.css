@@ -1,0 +1,187 @@
+/* ============================================================================
+   Jana Post — лендинг «найди ближайший пункт». Брендинг janapost.kz
+   ============================================================================ */
+:root {
+  --brand: #10b981;          /* фирменный зелёный */
+  --brand-dark: #059669;
+  --ink: #12151a;            /* основной тёмный текст */
+  --ink-soft: #4a4f57;
+  --paper: #f7f6f3;          /* тёплый off-white фон */
+  --paper-2: #f0ede8;
+  --card: #ffffff;
+  --line: #e6e2da;
+  --ok: #10b981;
+  --radius: 16px;
+  --shadow: 0 6px 24px rgba(18, 21, 26, 0.08);
+  --maxw: 1200px;
+  font-synthesis-weight: none;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--ink);
+  color: #fff;
+}
+.site-header .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 16px; padding-bottom: 16px;
+}
+.wordmark {
+  font-weight: 800; font-size: 22px; letter-spacing: -0.02em;
+  text-decoration: none; color: #fff; white-space: nowrap;
+}
+.wordmark b { color: var(--brand); }
+.header-tag { font-size: 13px; color: #b3b3b6; }
+
+/* ---------- Hero ---------- */
+.hero {
+  background:
+    radial-gradient(1200px 400px at 80% -10%, rgba(16, 185, 129, 0.12), transparent 60%),
+    var(--paper);
+  padding: 48px 0 24px;
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.1; letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+.hero h1 .accent { color: var(--brand); }
+.hero p { font-size: clamp(16px, 2vw, 19px); color: var(--ink-soft); max-width: 640px; margin: 0; }
+.hero .count-pill {
+  display: inline-block; margin-bottom: 18px;
+  background: var(--brand); color: #fff; font-weight: 700;
+  padding: 6px 14px; border-radius: 999px; font-size: 14px;
+}
+
+/* ---------- Main two-column ---------- */
+.locator {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 24px;
+  padding: 28px 0 56px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .locator { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.panel .panel-head { padding: 20px 20px 0; }
+.panel h2 { margin: 0 0 4px; font-size: 20px; letter-spacing: -0.01em; }
+.panel .sub { color: var(--ink-soft); font-size: 14px; margin: 0 0 16px; }
+
+/* search box */
+.search { padding: 0 20px 16px; }
+.search-row { display: flex; gap: 8px; }
+.search input[type="text"] {
+  flex: 1; min-width: 0;
+  padding: 13px 14px; font-size: 15px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--paper); color: var(--ink);
+}
+.search input[type="text"]:focus { outline: 2px solid var(--brand); border-color: transparent; }
+.btn {
+  border: 0; cursor: pointer; font-weight: 700; font-size: 15px;
+  padding: 13px 18px; border-radius: 12px;
+  background: var(--brand); color: #fff; transition: background .15s;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--brand-dark); }
+.btn.secondary {
+  background: transparent; color: var(--brand);
+  border: 1px solid var(--brand); padding: 10px 14px; font-size: 14px;
+  margin-top: 10px;
+}
+.btn.secondary:hover { background: rgba(16, 185, 129, 0.08); }
+.hint { font-size: 12px; color: #888; margin: 8px 0 0; }
+
+/* results */
+.results { list-style: none; margin: 0; padding: 0; max-height: 460px; overflow: auto; }
+.results li {
+  padding: 14px 20px; border-top: 1px solid var(--line);
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.results li:first-child { border-top: 1px solid var(--line); }
+.rank {
+  flex: 0 0 28px; height: 28px; border-radius: 999px;
+  background: var(--paper-2); color: var(--ink); font-weight: 700;
+  display: flex; align-items: center; justify-content: center; font-size: 13px;
+}
+.results li.is-nearest .rank { background: var(--brand); color: #fff; }
+.r-body { flex: 1; min-width: 0; }
+.r-name { font-weight: 700; font-size: 15px; }
+.r-addr { color: var(--ink-soft); font-size: 13px; margin-top: 2px; }
+.r-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; font-size: 12px; color: #888; }
+.r-dist { color: var(--brand); font-weight: 700; }
+.r-route { font-size: 13px; font-weight: 700; color: var(--brand); text-decoration: none; white-space: nowrap; }
+.r-route:hover { text-decoration: underline; }
+.state { padding: 18px 20px; color: var(--ink-soft); font-size: 14px; }
+
+/* map */
+.map-panel { padding: 0; }
+.map-frame { position: relative; overflow: hidden; border-radius: var(--radius); }
+#map { width: 100%; height: 560px; background: var(--paper-2); }
+@media (max-width: 900px) { #map { height: 420px; } }
+.map-credit { font-size: 11px; color: #aaa; padding: 6px 10px; }
+.map-credit a { color: #888; }
+
+/* leaflet markers — фирменные зелёные «капли» */
+.pin {
+  width: 26px; height: 26px; position: relative;
+}
+.pin svg { display: block; width: 26px; height: 26px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.3)); }
+.pin.is-nearest svg { width: 36px; height: 36px; }
+.pin.is-nearest { width: 36px; height: 36px; }
+.leaflet-popup-content { font: 14px/1.4 "Inter", system-ui, sans-serif; margin: 12px 14px; }
+.leaflet-popup-content .p-name { font-weight: 700; font-size: 15px; }
+.leaflet-popup-content .p-addr { color: var(--ink-soft); margin-top: 2px; }
+.leaflet-popup-content .p-phone { color: var(--ink-soft); margin-top: 4px; }
+.leaflet-popup-content .p-route { display: inline-block; margin-top: 8px; font-weight: 700; color: var(--brand); text-decoration: none; }
+.results li { cursor: pointer; }
+.results li:hover { background: var(--paper); }
+.user-dot {
+  width: 16px; height: 16px; border-radius: 50%; background: #2857fc;
+  border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(40,87,252,.4);
+}
+
+/* ---------- Full list ---------- */
+.all { padding: 8px 0 64px; }
+.all h2 { font-size: 22px; letter-spacing: -0.01em; margin: 0 0 16px; }
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;
+}
+.loc-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px;
+}
+.loc-card.hub { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(16,185,129,0.12); }
+.loc-card .badge {
+  display: inline-block; font-size: 11px; font-weight: 700; color: var(--brand);
+  background: rgba(16,185,129,0.1); padding: 2px 8px; border-radius: 999px; margin-bottom: 8px;
+}
+.loc-card h3 { margin: 0 0 4px; font-size: 16px; }
+.loc-card p { margin: 0; color: var(--ink-soft); font-size: 13px; }
+.loc-card .card-link { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--brand); text-decoration: none; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--ink); color: #b3b3b6; padding: 28px 0; font-size: 13px; }
+.site-footer a { color: #fff; text-decoration: none; }
