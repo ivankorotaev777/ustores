@@ -11,9 +11,11 @@
 // ============================================================================
 
 import { LOCATIONS, CITY_CENTER } from "../data/locations.js";
+import { CONFIG } from "./config.js";
 
-const TASHKENT_VIEWBOX = "69.10,41.40,69.55,41.18"; // left,top,right,bottom — рамка поиска
+const TASHKENT_BBOX = "69.10,41.18,69.55,41.40"; // minLon,minLat,maxLon,maxLat — рамка поиска
 const NEAREST_COUNT = 5;
+const TASHKENT_LL = `${CITY_CENTER.lng},${CITY_CENTER.lat}`; // для Яндекса: lon,lat
 
 // ---------- геометрия ----------
 function haversineKm(a, b) {
@@ -48,17 +50,121 @@ function routeLink(origin, loc) {
   return `https://yandex.ru/maps/?pt=${loc.lng},${loc.lat}&z=16&l=map`;
 }
 
-// ---------- геокодинг адреса (Nominatim) ----------
-async function geocode(query) {
+// ---------- геокодинг/подсказки адреса (Photon, OSM) ----------
+// Photon создан для автодополнения (в отличие от Nominatim, где автокомплит
+// запрещён). Возвращает координаты сразу — повторный геокодинг не нужен.
+function photonLabel(p) {
+  const main =
+    p.name ||
+    [p.street, p.housenumber].filter(Boolean).join(" ") ||
+    p.city ||
+    "Без названия";
+  const subParts = [p.district, p.city].filter(Boolean);
+  const sub = [...new Set(subParts)].filter((x) => x !== main).join(", ");
+  return { main, sub, full: [main, sub].filter(Boolean).join(", ") };
+}
+
+// В OSM по Узбекистану адреса записаны латиницей, а аудитория вводит кириллицей,
+// поэтому транслитерируем запрос (рус. → лат.) перед поиском.
+const TRANSLIT = {
+  а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "yo", ж: "j", з: "z", и: "i",
+  й: "y", к: "k", л: "l", м: "m", н: "n", о: "o", п: "p", р: "r", с: "s", т: "t",
+  у: "u", ф: "f", х: "x", ц: "ts", ч: "ch", ш: "sh", щ: "sh", ъ: "", ы: "i",
+  ь: "", э: "e", ю: "yu", я: "ya",
+};
+function translit(s) {
+  return s.toLowerCase().split("").map((c) => (c in TRANSLIT ? TRANSLIT[c] : c)).join("");
+}
+
+const [BB_W, BB_S, BB_E, BB_N] = TASHKENT_BBOX.split(",").map(Number);
+function inTashkent(lat, lng) {
+  return lat >= BB_S && lat <= BB_N && lng >= BB_W && lng <= BB_E;
+}
+
+async function suggestPhoton(query) {
+  const q = /[а-яё]/i.test(query) ? translit(query) : query;
   const url =
-    "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1" +
-    `&viewbox=${TASHKENT_VIEWBOX}&bounded=1&accept-language=ru` +
-    `&q=${encodeURIComponent(query + ", Ташкент")}`;
-  const res = await fetch(url, { headers: { "Accept": "application/json" } });
-  if (!res.ok) throw new Error("geocode_failed");
+    "https://photon.komoot.io/api/?limit=8&lang=en" +
+    `&lat=${CITY_CENTER.lat}&lon=${CITY_CENTER.lng}` +
+    `&q=${encodeURIComponent(q)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("suggest_failed");
   const data = await res.json();
-  if (!data.length) return null;
-  return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon), label: data[0].display_name };
+  return (data.features || [])
+    .map((f) => {
+      const [lng, lat] = f.geometry.coordinates;
+      return { lat, lng, ...photonLabel(f.properties || {}) };
+    })
+    .filter((s) => inTashkent(s.lat, s.lng))
+    .slice(0, 6);
+}
+
+async function photonGeocode(text) {
+  const items = await suggestPhoton(text);
+  return items.length ? { lat: items[0].lat, lng: items[0].lng } : null;
+}
+
+// ---------- Яндекс Геосаджест + Геокодер ----------
+// Саджест отдаёт только текст адреса (без координат), поэтому по выбору адреса
+// координаты берём через Геокодер. Оба ключа ограничены по Referer в кабинете.
+async function suggestYandex(query) {
+  const url =
+    "https://suggest-maps.yandex.ru/v1/suggest" +
+    `?apikey=${CONFIG.yandexSuggestKey}&text=${encodeURIComponent(query)}` +
+    `&lang=ru_RU&results=6&ll=${TASHKENT_LL}&spn=0.5,0.4&print_address=1&types=geo`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("yandex_suggest_failed");
+  const data = await res.json();
+  return (data.results || []).map((r) => {
+    const main = (r.title && r.title.text) || "";
+    const sub = (r.subtitle && r.subtitle.text) || "";
+    // координат нет — геокодим по formatted_address (точнее сырого текста)
+    const full =
+      (r.address && r.address.formatted_address) ||
+      [main, sub].filter(Boolean).join(", ");
+    return { main, sub, full, needGeocode: true };
+  });
+}
+
+async function geocodeYandex(text) {
+  const url =
+    "https://geocode-maps.yandex.ru/1.x/" +
+    `?apikey=${CONFIG.yandexGeocoderKey}&format=json&lang=ru_RU&results=1` +
+    `&ll=${TASHKENT_LL}&spn=0.5,0.4&geocode=${encodeURIComponent(text)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("yandex_geocode_failed");
+  const data = await res.json();
+  const member = data?.response?.GeoObjectCollection?.featureMember?.[0];
+  if (!member) return null;
+  const [lng, lat] = member.GeoObject.Point.pos.split(" ").map(Number);
+  return { lat, lng };
+}
+
+// ---------- единый интерфейс: Яндекс с фолбэком на OSM/Photon ----------
+async function suggest(query) {
+  if (CONFIG.yandexSuggestKey) {
+    try {
+      const items = await suggestYandex(query);
+      if (items.length) return items;
+    } catch {
+      /* ключ ещё активируется / лимит / сеть — падаем на Photon */
+    }
+  }
+  return suggestPhoton(query);
+}
+
+// вернуть координаты для выбранной подсказки
+async function resolveCoords(item) {
+  if (item.lat != null) return { lat: item.lat, lng: item.lng }; // Photon — координаты уже есть
+  if (CONFIG.yandexGeocoderKey) {
+    try {
+      const c = await geocodeYandex(item.full);
+      if (c) return c;
+    } catch {
+      /* фолбэк ниже */
+    }
+  }
+  return photonGeocode(item.full); // запасной геокодинг по OSM
 }
 
 // ---------- рендер ----------
@@ -230,23 +336,43 @@ function focusLocation(loc) {
 }
 
 // ---------- handlers ----------
+async function chooseOrigin(item) {
+  els.input.value = item.full;
+  let origin = { lat: item.lat, lng: item.lng };
+  if (item.lat == null) {
+    setState("Определяем адрес…");
+    try {
+      origin = await resolveCoords(item);
+    } catch {
+      origin = null;
+    }
+    if (!origin) {
+      setState("Не удалось определить координаты адреса. Попробуйте другой.");
+      return;
+    }
+  }
+  setState("");
+  renderResults(origin, nearest(origin));
+}
+
 async function doSearch() {
   const q = els.input.value.trim();
   if (!q) {
     els.input.focus();
     return;
   }
+  hideSuggest();
   setState("Ищем адрес…");
   els.results.innerHTML = "";
   try {
-    const origin = await geocode(q);
-    if (!origin) {
+    const items = await suggest(q);
+    if (!items.length) {
       setState("Не удалось распознать адрес. Уточните улицу или ориентир.");
       return;
     }
-    renderResults(origin, nearest(origin));
+    chooseOrigin(items[0]);
   } catch {
-    setState("Ошибка геокодинга. Попробуйте ещё раз или укажите ориентир.");
+    setState("Ошибка поиска адреса. Попробуйте ещё раз или укажите ориентир.");
   }
 }
 
@@ -267,10 +393,114 @@ function useMyLocation() {
   );
 }
 
-els.search.addEventListener("click", doSearch);
+// ---------- автодополнение адреса (выпадающий список) ----------
+const sugEl = document.getElementById("suggest");
+let sugItems = [];
+let sugActive = -1;
+let sugSeq = 0;
+
+function debounce(fn, ms) {
+  let t;
+  return (...a) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...a), ms);
+  };
+}
+
+function hideSuggest() {
+  sugEl.hidden = true;
+  sugEl.innerHTML = "";
+  sugItems = [];
+  sugActive = -1;
+  els.input.setAttribute("aria-expanded", "false");
+}
+
+function setActive(i) {
+  const lis = [...sugEl.querySelectorAll("li:not(.s-empty)")];
+  lis.forEach((li) => li.classList.remove("active"));
+  sugActive = i;
+  if (i >= 0 && lis[i]) {
+    lis[i].classList.add("active");
+    lis[i].scrollIntoView({ block: "nearest" });
+  }
+}
+
+function renderSuggest(items) {
+  sugItems = items;
+  sugActive = -1;
+  sugEl.innerHTML = "";
+  if (!items.length) {
+    sugEl.innerHTML = `<li class="s-empty" aria-disabled="true">Ничего не найдено</li>`;
+  } else {
+    items.forEach((it, i) => {
+      const li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.innerHTML =
+        `<div class="s-main">${escapeHtml(it.main)}</div>` +
+        (it.sub ? `<div class="s-sub">${escapeHtml(it.sub)}</div>` : "");
+      // mousedown (не click) — чтобы успеть до blur инпута
+      li.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        hideSuggest();
+        chooseOrigin(it);
+      });
+      li.addEventListener("mouseenter", () => setActive(i));
+      sugEl.appendChild(li);
+    });
+  }
+  sugEl.hidden = false;
+  els.input.setAttribute("aria-expanded", "true");
+}
+
+const onType = debounce(async () => {
+  const q = els.input.value.trim();
+  if (q.length < 3) {
+    hideSuggest();
+    return;
+  }
+  const seq = ++sugSeq;
+  try {
+    const items = await suggest(q);
+    if (seq !== sugSeq) return; // устаревший ответ — игнорируем
+    renderSuggest(items);
+  } catch {
+    hideSuggest();
+  }
+}, 250);
+
+els.input.addEventListener("input", onType);
 els.input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") doSearch();
+  if (sugEl.hidden || !sugItems.length) {
+    if (e.key === "Enter") doSearch();
+    return;
+  }
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    setActive(Math.min(sugActive + 1, sugItems.length - 1));
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    setActive(Math.max(sugActive - 1, 0));
+  } else if (e.key === "Enter") {
+    e.preventDefault();
+    if (sugActive >= 0) {
+      const it = sugItems[sugActive];
+      hideSuggest();
+      chooseOrigin(it);
+    } else {
+      doSearch();
+    }
+  } else if (e.key === "Escape") {
+    hideSuggest();
+  }
 });
+els.input.addEventListener("focus", () => {
+  if (sugItems.length) sugEl.hidden = false;
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".ac")) hideSuggest();
+});
+
+els.search.addEventListener("click", doSearch);
 els.geo.addEventListener("click", useMyLocation);
 
 renderAll();

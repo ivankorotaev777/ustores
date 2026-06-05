@@ -46,7 +46,12 @@
       </div>
       <div class="search">
         <div class="search-row">
-          <input id="addr" type="text" placeholder="Напр.: Чиланзар 12 квартал" autocomplete="off" />
+          <div class="ac">
+            <input id="addr" type="text" placeholder="Напр.: Чиланзар 12 квартал"
+                   autocomplete="off" role="combobox" aria-autocomplete="list"
+                   aria-expanded="false" aria-controls="suggest" />
+            <ul id="suggest" class="suggest" role="listbox" hidden></ul>
+          </div>
           <button id="searchBtn" class="btn" type="button">Найти</button>
         </div>
         <button id="geoBtn" class="btn secondary" type="button">📍 Использовать мою геолокацию</button>
