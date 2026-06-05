@@ -152,6 +152,12 @@ body {
 .r-dist { color: var(--brand); font-weight: 700; }
 .r-route { font-size: 13px; font-weight: 700; color: var(--brand); text-decoration: none; white-space: nowrap; }
 .r-route:hover { text-decoration: underline; }
+/* на узких экранах «Маршрут →» переносится на свою строку под адресом,
+   иначе ссылка выезжает за панель и обрезается overflow:hidden */
+@media (max-width: 600px) {
+  .results li { flex-wrap: wrap; }
+  .r-route { flex-basis: 100%; margin: 8px 0 0 40px; }
+}
 .state { padding: 18px 20px; color: var(--ink-soft); font-size: 14px; }
 
 /* map */
