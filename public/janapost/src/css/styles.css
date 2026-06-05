@@ -46,6 +46,7 @@ body {
 }
 .wordmark b { color: var(--brand); }
 .header-tag { font-size: 13px; color: #b3b3b6; }
+@media (max-width: 600px) { .header-tag { display: none; } }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -76,7 +77,7 @@ body {
   align-items: start;
 }
 @media (max-width: 900px) {
-  .locator { grid-template-columns: 1fr; }
+  .locator { grid-template-columns: minmax(0, 1fr); }
 }
 
 .panel {
@@ -85,6 +86,7 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
+  min-width: 0; /* позволяет grid/flex-элементу сжиматься, иначе панель уезжает за край */
 }
 .panel .panel-head { padding: 20px 20px 0; }
 .panel h2 { margin: 0 0 4px; font-size: 20px; letter-spacing: -0.01em; }
