@@ -93,12 +93,27 @@ body {
 /* search box */
 .search { padding: 0 20px 16px; }
 .search-row { display: flex; gap: 8px; }
+.ac { position: relative; flex: 1; min-width: 0; }
 .search input[type="text"] {
-  flex: 1; min-width: 0;
+  width: 100%; min-width: 0;
   padding: 13px 14px; font-size: 15px;
   border: 1px solid var(--line); border-radius: 12px;
   background: var(--paper); color: var(--ink);
 }
+
+/* выпадающие подсказки адресов */
+.suggest {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 60;
+  list-style: none; margin: 0; padding: 4px;
+  background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: var(--shadow); max-height: 300px; overflow: auto;
+}
+.suggest[hidden] { display: none; }
+.suggest li { padding: 10px 12px; border-radius: 8px; cursor: pointer; }
+.suggest li:hover, .suggest li.active { background: var(--paper); }
+.suggest .s-main { font-weight: 600; font-size: 14px; }
+.suggest .s-sub { color: var(--ink-soft); font-size: 12px; margin-top: 1px; }
+.suggest .s-empty { padding: 10px 12px; color: var(--ink-soft); font-size: 13px; }
 .search input[type="text"]:focus { outline: 2px solid var(--brand); border-color: transparent; }
 .btn {
   border: 0; cursor: pointer; font-weight: 700; font-size: 15px;
