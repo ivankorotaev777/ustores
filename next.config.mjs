@@ -2,13 +2,16 @@
 const nextConfig = {
   async rewrites() {
     return {
-      // Serve the static Jana Post landing (public/janapost/) at /janapost.
+      // Статические страницы из public/: лендинг Jana Post и карта вакансий.
       // beforeFiles runs ahead of the dynamic app/[lang] route, so /janapost
       // is not interpreted as a language. Sub-assets (/janapost/src, /poster)
       // are served directly from public/ and are unaffected.
       beforeFiles: [
         { source: '/janapost', destination: '/janapost/index.html' },
         { source: '/janapost/', destination: '/janapost/index.html' },
+        // Карта вакансий: где сейчас нужны администраторы пунктов выдачи.
+        { source: '/rabota', destination: '/rabota/index.html' },
+        { source: '/rabota/', destination: '/rabota/index.html' },
       ],
     };
   },

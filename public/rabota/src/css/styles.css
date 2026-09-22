@@ -1,0 +1,300 @@
+/* Карта вакансий Ustores. Вёрстка в том же духе, что страница Jana Post:
+   шапка, герой, две колонки (поиск + карта), карточки, подвал. */
+
+:root {
+  --brand: #7c3aed;
+  --brand-dark: #5b21b6;
+  --hiring: #16a34a;
+  --hiring-dark: #15803d;
+  --soon: #f59e0b;
+  --idle: #94a3b8;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --bg: #ffffff;
+  --bg-soft: #f8fafc;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+/* --- шапка --- */
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 60px;
+}
+.wordmark {
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+  text-decoration: none;
+}
+.header-tag { color: var(--muted); font-size: 13px; }
+
+/* --- герой --- */
+.hero {
+  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  padding: 44px 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+.count-pill {
+  display: inline-block;
+  background: #ede9fe;
+  color: var(--brand-dark);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.hero h1 {
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 14px 0 12px;
+  max-width: 860px;
+}
+.hero .accent { color: var(--brand); }
+.hero .lead { font-size: 16px; font-weight: 600; margin: 0 0 8px; }
+.hero .sub, .panel-head .sub { color: var(--muted); font-size: 14px; margin: 0; }
+
+/* --- две колонки --- */
+.locator {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 20px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+  align-items: start;
+}
+.panel {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.panel-head h2 { font-size: 17px; margin: 0 0 4px; }
+
+/* --- поиск --- */
+.search { margin-top: 14px; }
+.search-row { display: flex; gap: 8px; }
+.ac { position: relative; flex: 1; }
+.ac input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+}
+.ac input:focus { outline: 2px solid #ddd6fe; border-color: var(--brand); }
+.btn {
+  height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.btn:hover { background: var(--brand-dark); }
+.btn.secondary {
+  width: 100%;
+  margin-top: 8px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-weight: 500;
+}
+.btn.secondary:hover { background: #f1f5f9; }
+
+.suggest {
+  position: absolute;
+  left: 0; right: 0; top: 46px;
+  margin: 0; padding: 4px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 600;
+}
+.suggest li { padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.suggest li.active, .suggest li:hover { background: #f1f5f9; }
+.suggest .s-main { font-size: 14px; }
+.suggest .s-sub { font-size: 12px; color: var(--muted); }
+.suggest .s-empty { color: var(--muted); cursor: default; }
+
+/* --- фильтры --- */
+.filters { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 14px; }
+.switch { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.switch input { width: 16px; height: 16px; accent-color: var(--hiring); }
+.chips { display: flex; gap: 6px; margin-top: 10px; }
+.chip {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.chip.is-on { background: var(--brand); border-color: var(--brand); color: #fff; font-weight: 600; }
+
+/* --- результаты --- */
+.state { margin-top: 12px; font-size: 13px; color: var(--muted); }
+.results { list-style: none; margin: 12px 0 0; padding: 0; }
+.results li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.results li.is-nearest { border-color: var(--hiring); box-shadow: 0 0 0 2px #dcfce7; }
+.rank {
+  flex: 0 0 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.results li.is-nearest .rank { background: var(--hiring); color: #fff; }
+.r-body { flex: 1; min-width: 0; }
+.r-name { font-weight: 600; font-size: 14px; }
+.r-addr { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.r-meta { display: flex; gap: 10px; font-size: 12px; margin-top: 4px; align-items: center; }
+.r-dist { font-weight: 600; color: var(--hiring-dark); }
+.tag {
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--muted);
+  font-weight: 600;
+}
+.tag.hiring { background: #dcfce7; color: var(--hiring-dark); }
+.tag.soon { background: #fef3c7; color: #92400e; }
+.r-apply { font-size: 12px; font-weight: 600; color: var(--brand); text-decoration: none; white-space: nowrap; }
+
+/* --- карта --- */
+.map-panel { padding: 12px; }
+.map-frame { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+#map { height: 520px; width: 100%; }
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 10px 4px 2px;
+}
+.legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
+.dot.hiring { background: var(--hiring); }
+.dot.soon { background: var(--soon); }
+.dot.idle { background: var(--idle); }
+.map-credit { font-size: 11px; color: var(--muted); padding: 2px 4px; }
+
+.pin svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+.pin.is-nearest svg { filter: drop-shadow(0 4px 10px rgba(22,163,74,.5)); }
+.user-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #2563eb; border: 3px solid #fff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, .25);
+}
+.p-name { font-weight: 700; font-size: 14px; }
+.p-addr { font-size: 12px; color: var(--muted); margin: 3px 0 6px; }
+.p-apply {
+  display: inline-block;
+  background: var(--brand);
+  color: #fff !important;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+/* --- карточки --- */
+.all { padding-bottom: 40px; }
+.all h2 { font-size: 19px; margin: 8px 0 16px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.loc-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff;
+}
+.loc-card.hiring { border-color: #bbf7d0; background: #f0fdf4; }
+.loc-card h3 { font-size: 15px; margin: 6px 0 4px; }
+.loc-card p { font-size: 13px; color: var(--muted); margin: 0; }
+.card-link { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--brand); text-decoration: none; }
+.note { color: var(--muted); font-size: 14px; margin: 18px 0 12px; }
+.cta {
+  display: inline-block;
+  background: var(--brand);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.cta:hover { background: var(--brand-dark); }
+
+/* --- подвал --- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--bg-soft);
+}
+.site-footer a { color: var(--brand); }
+
+@media (max-width: 900px) {
+  .locator { grid-template-columns: 1fr; }
+  #map { height: 400px; }
+}
