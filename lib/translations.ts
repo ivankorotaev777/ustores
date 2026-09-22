@@ -13,6 +13,7 @@ export const translations = {
       contact: 'Связаться',
       forLandlords: 'Для арендодателей',
       personnelSearch: 'Поиск оператора',
+      jobs: 'Работа у нас',
     },
     hero: {
       badge: 'Сеть ПВЗ в Узбекистане',
@@ -212,6 +213,7 @@ export const translations = {
       contact: 'Contact',
       forLandlords: 'For Landlords',
       personnelSearch: 'Staff hiring',
+      jobs: 'Jobs',
     },
     hero: {
       badge: 'Pickup Point Network in Uzbekistan',
@@ -411,6 +413,7 @@ export const translations = {
       contact: '联系我们',
       forLandlords: '房东专区',
       personnelSearch: '人员招聘',
+      jobs: '招聘',
     },
     hero: {
       badge: '乌兹别克斯坦自提点网络',
@@ -610,6 +613,7 @@ export const translations = {
       contact: "Bog'lanish",
       forLandlords: 'Ijaraga beruvchilar uchun',
       personnelSearch: 'Kadrlar tanlovi',
+      jobs: 'Bizda ish',
     },
     hero: {
       badge: "O'zbekistondagi buyurtma olish punktlari",

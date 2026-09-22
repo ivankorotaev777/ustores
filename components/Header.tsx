@@ -44,6 +44,10 @@ export function Header({ lang }: HeaderProps) {
             <Link href={`/${lang}/poisk-personala`} className="text-slate-300 hover:text-white transition-colors text-sm">
               {t.nav.personnelSearch}
             </Link>
+            {/* Карта вакансий: статическая страница public/rabota, вне языковых маршрутов */}
+            <a href="/rabota" className="text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium">
+              {t.nav.jobs}
+            </a>
           </nav>
 
           {/* Right Side */}
@@ -157,6 +161,13 @@ export function Header({ lang }: HeaderProps) {
               >
                 {t.nav.personnelSearch}
               </Link>
+              <a
+                href="/rabota"
+                className="px-4 py-3 text-emerald-400 hover:text-emerald-300 hover:bg-white/5 rounded-lg transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t.nav.jobs}
+              </a>
               <a
                 href="https://t.me/Ivan_Korotaev"
                 target="_blank"
