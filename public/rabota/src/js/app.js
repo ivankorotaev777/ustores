@@ -77,8 +77,23 @@ function coordsOf(a, b, link) {
   return null;
 }
 
+// Telegram принимает в ссылке ?start= только латиницу, цифры, дефис и
+// подчёркивание, поэтому кириллические названия транслитерируем. Тот же
+// алгоритм повторён в боте, иначе он не поймёт, какой пункт выбрал человек.
+const TRANSLIT_SLUG = {
+  а:"a",б:"b",в:"v",г:"g",д:"d",е:"e",ё:"e",ж:"zh",з:"z",и:"i",й:"y",к:"k",л:"l",
+  м:"m",н:"n",о:"o",п:"p",р:"r",с:"s",т:"t",у:"u",ф:"f",х:"h",ц:"ts",ч:"ch",
+  ш:"sh",щ:"sch",ъ:"",ы:"y",ь:"",э:"e",ю:"yu",я:"ya",
+};
+
 function slugify(name) {
-  return String(name).toLowerCase().replace(/[^a-zа-яё0-9]+/gi, "-").replace(/^-|-$/g, "").slice(0, 40) || "pvz";
+  const out = [];
+  for (const ch of String(name).toLowerCase()) {
+    if (ch in TRANSLIT_SLUG) out.push(TRANSLIT_SLUG[ch]);
+    else if (/[a-z0-9]/.test(ch)) out.push(ch);
+    else out.push("-");
+  }
+  return out.join("").replace(/-+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "pvz";
 }
 
 function rowsToLocations(rows) {
