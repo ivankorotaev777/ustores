@@ -44,7 +44,7 @@ const I18N = {
     "net.k1.v": "~60",
     "net.k1.l": "points opened in 10 months",
     "net.k2.v": "+60",
-    "net.k2.l": "more in one quarter — our proven pace",
+    "net.k2.l": "more points in one quarter — we have the capacity and the expertise to open them",
     "net.k3.v": "Largest",
     "net.k3.l": "share in the Ozon, PDD and Uzum partner networks",
 
@@ -125,7 +125,7 @@ const I18N = {
     "net.k1.v": "~60",
     "net.k1.l": "точек открыто за 10 месяцев",
     "net.k2.v": "+60",
-    "net.k2.l": "ещё за один квартал — наш подтверждённый темп",
+    "net.k2.l": "точек ещё за один квартал — у нас есть мощности и экспертиза, чтобы их открыть",
     "net.k3.v": "Крупнейшая",
     "net.k3.l": "доля в партнёрских сетях Ozon, PDD и Uzum",
 
