@@ -12,6 +12,9 @@ const nextConfig = {
         // Карта вакансий: где сейчас нужны администраторы пунктов выдачи.
         { source: '/rabota', destination: '/rabota/index.html' },
         { source: '/rabota/', destination: '/rabota/index.html' },
+        // Закрытая презентация для Temu (пароль проверяет middleware.ts).
+        { source: '/temu', destination: '/temu/index.html' },
+        { source: '/temu/', destination: '/temu/index.html' },
       ],
     };
   },
