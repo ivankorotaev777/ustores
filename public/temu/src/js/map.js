@@ -18,8 +18,8 @@ const SHEET_URL =
 
 const CITY_CENTER = { lat: 41.3111, lng: 69.2797 };
 
-// Цвета брендов подобраны под тёмную подложку (ярче фирменных, чтобы читались).
-export const BRAND_COLOR = { Uzum: "#a78bfa", Ozon: "#60a5fa", Other: "#94a3b8" };
+// Цвета брендов для светлой подложки карты (насыщенные, читаются на сером).
+export const BRAND_COLOR = { Uzum: "#7c3aed", Ozon: "#2563eb", Other: "#64748b" };
 export const TEMU_COLOR = "#FB7701";
 
 // ---------------------------------------------------------------- данные ---
@@ -147,8 +147,7 @@ export function initMap(el = "map") {
   if (!L || !document.getElementById(el)) return null;
   lmap = L.map(el, { scrollWheelZoom: false, zoomSnap: 0.25, attributionControl: true })
     .setView([CITY_CENTER.lat, CITY_CENTER.lng], 11);
-  // Обычные плитки OpenStreetMap, затемнённые CSS-фильтром (см. .leaflet-tile-pane в styles.css),
-  // чтобы карта не выбивалась из тёмной темы сайта. Платные тёмные подложки требуют ключ.
+  // Обычные плитки OpenStreetMap, слегка приглушённые CSS-фильтром (см. .leaflet-tile-pane в styles.css).
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -162,11 +161,11 @@ function markerFor(loc, labels) {
   const building = loc.status === "building";
   const m = L.circleMarker([loc.lat, loc.lng], {
     radius: building ? 7 : 8,
-    color,
-    weight: building ? 2 : 2.5,
+    color: building ? color : "#ffffff",
+    weight: building ? 2 : 2,
     opacity: 1,
     fillColor: color,
-    fillOpacity: building ? 0.15 : 0.85,
+    fillOpacity: building ? 0.12 : 0.9,
     dashArray: building ? "3 3" : null,
     className: "pvz-dot" + (building ? " is-building" : ""),
   });
