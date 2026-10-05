@@ -18,13 +18,13 @@ export default function TemuLoginPage({ searchParams }: PageProps) {
 
   return (
     <main
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 px-4"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black px-4"
       style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
     >
       {/* Фон как в герое главной */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-amber-500/20 rounded-full blur-[120px] motion-safe:animate-blob will-change-transform" />
-        <div className="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-orange-500/15 rounded-full blur-[120px] motion-safe:animate-blob motion-safe:[animation-delay:-7s] will-change-transform" />
+        <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px] motion-safe:animate-blob will-change-transform" />
+        <div className="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[120px] motion-safe:animate-blob motion-safe:[animation-delay:-7s] will-change-transform" />
         <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
@@ -36,7 +36,7 @@ export default function TemuLoginPage({ searchParams }: PageProps) {
       </div>
 
       <div className="relative w-full max-w-md">
-        <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-3xl border border-white/10 p-8 sm:p-10 backdrop-blur-xl motion-safe:animate-scale-in">
+        <div className="relative bg-black rounded-3xl border border-white/10 p-8 sm:p-10 motion-safe:animate-scale-in">
           <div className="absolute -top-px -right-px w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-tr-3xl rounded-bl-3xl opacity-20" />
 
           <div className="flex items-center gap-3 mb-8">
@@ -69,7 +69,7 @@ export default function TemuLoginPage({ searchParams }: PageProps) {
                 autoFocus
                 required
                 placeholder="Password · Пароль"
-                className="w-full rounded-2xl bg-white/5 border border-white/10 px-5 py-4 text-white placeholder:text-slate-500 outline-none focus:border-amber-400/60 focus:ring-2 focus:ring-amber-400/20 transition"
+                className="w-full rounded-2xl bg-white/[0.06] border border-white/15 px-5 py-4 text-white placeholder:text-slate-500 outline-none focus:border-amber-400/60 focus:ring-2 focus:ring-amber-400/20 transition"
               />
             </label>
 
