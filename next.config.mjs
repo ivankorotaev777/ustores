@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      // Короткая ссылка для вакансий на OLX: OLX не принимает ссылки на
+      // мессенджеры, поэтому ведём на сайт, а сайт сразу отправляет в бот
+      // найма Mila. start=olx — чтобы бот записал источник кандидата.
+      // Временный редирект (307), чтобы можно было поменять адрес без кэша.
+      { source: '/olx', destination: 'https://t.me/Mila2_ustores_bot?start=olx', permanent: false },
+      { source: '/olx/', destination: 'https://t.me/Mila2_ustores_bot?start=olx', permanent: false },
+    ];
+  },
   async rewrites() {
     return {
       // Статические страницы из public/: лендинг Jana Post и карта вакансий.
