@@ -5,6 +5,11 @@ on:
     # 02:00 и 14:00 UTC = 07:00 и 19:00 по Ташкенту
     - cron: '0 2,14 * * *'
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Опубликовать снимок, даже если таблица не менялась'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -26,7 +31,7 @@ jobs:
 
       # Скрипт сам не трогает файл, если таблица не менялась, — тогда нет ни коммита, ни деплоя.
       - name: Обновить снимок
-        run: python scripts/build_rabota_snapshot.py
+        run: python scripts/build_rabota_snapshot.py ${{ inputs.force && '--force' || '' }}
 
       - name: Закоммитить, если данные изменились
         run: |

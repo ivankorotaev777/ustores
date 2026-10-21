@@ -11,7 +11,9 @@
      Отпечаток считается так же в app.js (fingerprint), чтобы страница могла
      понять, правили ли таблицу после последней проверки.
 
-Запуск: python3 scripts/build_rabota_snapshot.py [путь/к/fallback.js]
+Запуск: python3 scripts/build_rabota_snapshot.py [путь/к/fallback.js] [--force]
+  --force — пересобрать снимок, даже если таблица не менялась (ручная публикация);
+            CHANGED_AT при этом сохраняется, меняется только SNAPSHOT_AT.
 Перенесён из HR_Ustores/scripts/build_map_data.py (21.10.2026).
 """
 from __future__ import annotations
@@ -164,25 +166,37 @@ def previous_fingerprint(dest: str) -> str | None:
         return None
 
 
+def previous_changed_at(dest: str) -> str | None:
+    try:
+        m = re.search(r'export const CHANGED_AT = "([^"]+)"', open(dest, encoding="utf-8").read())
+        return m.group(1) if m else None
+    except FileNotFoundError:
+        return None
+
+
 def main() -> None:
-    dest = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_DEST
+    force = "--force" in sys.argv
+    args = [a for a in sys.argv[1:] if a != "--force"]
+    dest = args[0] if args else DEFAULT_DEST
     raw = urllib.request.urlopen(URL, timeout=30).read().decode("utf-8")
     rows = list(csv.reader(io.StringIO(raw)))
     fp = fingerprint(rows)
-    if fp == previous_fingerprint(dest):
+    unchanged = fp == previous_fingerprint(dest)
+    if unchanged and not force:
         print(f"{dest}: таблица не менялась (отпечаток {fp}), файл не трогаем")
         return
     data = locations(rows)
     if not data:
         sys.exit("таблица пустая или не распознана — снимок не обновляем")
     stamp = datetime.now(TZ).strftime("%d.%m.%Y %H:%M")
+    changed_at = (previous_changed_at(dest) if unchanged else None) or stamp
     body = json.dumps(data, ensure_ascii=False, indent=0).replace("\n", "")
     with open(dest, "w", encoding="utf-8") as f:
         f.write(
             "// Снимок таблицы пунктов: запасной вариант и дата последнего изменения данных.\n"
             f"// Сгенерирован scripts/build_rabota_snapshot.py, {stamp} (Ташкент). Руками не править.\n"
             f"export const SNAPSHOT_AT = \"{stamp}\";\n"
-            f"export const CHANGED_AT = \"{stamp}\";\n"
+            f"export const CHANGED_AT = \"{changed_at}\";\n"
             f"export const FINGERPRINT = \"{fp}\";\n"
             f"export const SNAPSHOT = {body};\n"
         )
