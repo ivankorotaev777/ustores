@@ -12,7 +12,7 @@
 // ============================================================================
 
 import { CONFIG } from "./config.js";
-import { SNAPSHOT, SNAPSHOT_AT } from "../data/fallback.js";
+import { SNAPSHOT, SNAPSHOT_AT, CHANGED_AT, FINGERPRINT } from "../data/fallback.js";
 
 const SHEET_ID = "1O9j79aN8E_xlaGiOWy9SJNH4BGG0g5nnaI4hfISW1hc";
 const SHEET_GID = "58406550";
@@ -135,13 +135,43 @@ function rowsToLocations(rows) {
   return out;
 }
 
+// Отпечаток таблицы — тот же алгоритм, что в scripts/build_rabota_snapshot.py
+// (FNV-1a по UTF-16). Совпал со снимком — данные не менялись с CHANGED_AT;
+// не совпал — таблицу правили после последней проверки (она идёт дважды в сутки).
+const FP_COLUMNS = [
+  "Внутреннее название", "Название для отчетности", "Статус", "Тип бизнеса",
+  "Адрес", "Потребность в персонале", "Дата выхода",
+  "Координаты Долгота (latitude)", "Координаты Широта (longitude)", "Ссылка на локацию",
+];
+
+function fingerprint(rows) {
+  const idx = {};
+  rows[0].forEach((h, i) => { idx[key(h)] = i; });
+  const cols = FP_COLUMNS.map((c) => idx[key(c)]);
+  const lines = [];
+  for (const row of rows.slice(1)) {
+    const cells = cols.map((i) => (i === undefined ? "" : String(row[i] || "").replace(/\s+/g, " ").trim()));
+    if (cells.some(Boolean)) lines.push(cells.join("\u001f"));
+  }
+  const s = lines.join("\u001e");
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(16).padStart(8, "0");
+}
+
 async function loadLocations() {
   try {
     const res = await fetch(SHEET_URL, { cache: "no-store" });
     if (!res.ok) throw new Error("sheet_http_" + res.status);
-    const list = rowsToLocations(parseCsv(await res.text()));
+    const rows = parseCsv(await res.text());
+    const list = rowsToLocations(rows);
     if (list.length) {
-      stamp(`Данные из рабочей таблицы, обновлены только что · карта © OpenStreetMap`);
+      stamp(fingerprint(rows) === FINGERPRINT
+        ? `Данные из рабочей таблицы · последнее изменение ${CHANGED_AT} · карта © OpenStreetMap`
+        : `Данные из рабочей таблицы · изменены после ${CHANGED_AT} · карта © OpenStreetMap`);
       return list;
     }
     throw new Error("sheet_empty");

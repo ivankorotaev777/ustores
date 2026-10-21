@@ -1,0 +1,43 @@
+name: Снимок таблицы для карты /rabota
+
+on:
+  schedule:
+    # 02:00 и 14:00 UTC = 07:00 и 19:00 по Ташкенту
+    - cron: '0 2,14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rabota-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Скрипт сам не трогает файл, если таблица не менялась, — тогда нет ни коммита, ни деплоя.
+      - name: Обновить снимок
+        run: python scripts/build_rabota_snapshot.py
+
+      - name: Закоммитить, если данные изменились
+        run: |
+          if git diff --quiet public/rabota/src/data/fallback.js; then
+            echo "Таблица не менялась, коммитить нечего"
+          else
+            # Автор — Иван: команда Vercel собирает только коммиты авторов,
+            # чей GitHub привязан к участнику, коммиты бота заблокирует.
+            git config user.name "ivankorotaev777"
+            git config user.email "ivan@debexpert.com"
+            git add public/rabota/src/data/fallback.js
+            git commit -m "Карта /rabota: снимок таблицы $(TZ=Asia/Tashkent date +'%d.%m.%Y %H:%M')"
+            git push
+          fi
